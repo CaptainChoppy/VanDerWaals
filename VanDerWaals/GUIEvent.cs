@@ -16,7 +16,7 @@
         {
             MouseButton = Inputs.GetMouseButton();
             MouseButtonState = Inputs.GetMouseState(MouseButton);
-            CursorPosition = Cursor.Position;
+            CursorPosition = Cursor.TruePosition;
         }
 
         public override string ToString()

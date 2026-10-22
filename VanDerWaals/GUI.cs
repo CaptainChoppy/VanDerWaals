@@ -1,4 +1,7 @@
 ﻿
+using System.Drawing;
+using System.Numerics;
+
 namespace VanDerWaals
 {
     internal static class GUI
@@ -15,7 +18,12 @@ namespace VanDerWaals
             {
                 element.Element.Update();
 
-                bool mouseinsiderect = GUIElement.IsPositionInsideRectange(CurrentMouseEvents.CursorPosition, element.Element.Rectangle);
+                Vector2 rectposition = element.Element.Rectangle.Position * Renderer.GUISizeScalar;
+                Vector2 sizescale = element.Element.Rectangle.Size * Renderer.GUISizeScalar;
+
+                Raylib_cs.Rectangle scaledrectangle = new Raylib_cs.Rectangle(rectposition, sizescale);
+
+                bool mouseinsiderect = GUIElement.IsPositionInsideRectange(CurrentMouseEvents.CursorPosition, scaledrectangle);
 
                 if(mouseinsiderect == false)
                 {

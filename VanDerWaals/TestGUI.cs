@@ -11,7 +11,14 @@ namespace VanDerWaals
 
         public override void MouseDown(GUIMouseEvent mouseevent)
         {
-            ColourTint = new Color(0x00, 0x00, 0xFF);
+            if(Time.GlobalFrameTime % 2 == 0)
+            {
+                ColourTint = new Color(0x00, 0x00, 0xFF);
+            }
+            else
+            {
+                ColourTint = new Color(0x00, 0xFF, 0xFF);
+            }
         }
 
         public override void MouseHover(GUIMouseEvent mouseevent)

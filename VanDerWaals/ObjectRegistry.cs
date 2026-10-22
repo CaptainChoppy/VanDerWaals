@@ -2,7 +2,7 @@
 {
     internal static class ObjectRegistry
     {
-        private static List<GameObject> GameObjects = new List<GameObject>();
+        private static readonly List<GameObject> GameObjects = new List<GameObject>();
 
         public static void Update()
         {

@@ -66,8 +66,8 @@ namespace VanDerWaals
 
         public static explicit operator WorldPosition(ScreenPosition position)
         {
-            float x =  ((position.X * Viewport.Scale) + Viewport.Position.X - (Screen.Width / 2.0f));
-            float y = -((position.Y * Viewport.Scale) + Viewport.Position.Y - (Screen.Height / 2.0f));
+            float x =  ((position.X * Viewport.Scale) + Viewport.Position.X - (Screen.ReferenceScreenWidth  / 2.0f));
+            float y = -((position.Y * Viewport.Scale) + Viewport.Position.Y - (Screen.ReferenceScreenHeight / 2.0f));
 
             return new WorldPosition(x, y);
         }

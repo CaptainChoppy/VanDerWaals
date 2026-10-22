@@ -5,14 +5,23 @@ namespace VanDerWaals
 {
     internal static class Renderer
     {
-        public const int DefaultScreenWidth = 800;
-        public const int DefaultScreenHeight = 600;
+        public const int FrameRate = 40;
+
+        public static float GUISizeScalar => Screen.Scale;
+        private static float ObjectScreenSizeScalar => Screen.Scale / Viewport.Scale;
+
+        private const string WindowTitle = "VanDerWaals";
 
         public static void CreateWindow()
         {
             Raylib.SetConfigFlags(ConfigFlags.AlwaysRunWindow | ConfigFlags.ResizableWindow);
-            Raylib.SetTargetFPS(45);
-            Raylib.InitWindow(DefaultScreenWidth, DefaultScreenHeight, "VanDerWaals");
+            
+            if(FrameRate != 0)
+            {
+                Raylib.SetTargetFPS(FrameRate);
+            }
+
+            Raylib.InitWindow(Screen.ReferenceScreenWidth, Screen.ReferenceScreenHeight, WindowTitle);
         }
 
         public static void CloseWindow()
@@ -35,7 +44,7 @@ namespace VanDerWaals
 
         public static void DrawGameObject(GameObject gameobject)
         {
-            DrawTexture(Textures.Test, gameobject.Position, gameobject.Size);
+            DrawTexture(Textures.Default, gameobject.Position, gameobject.Size);
         }
 
         public static void DrawTexture(Texture texture, WorldPosition position, Vector2 size)
@@ -44,19 +53,21 @@ namespace VanDerWaals
 
             Rectangle texturerectangle = new Rectangle(Vector2.Zero, texture.Size);
 
-            Rectangle screenrectangle = new Rectangle((Vector2)(screenposition), size / Viewport.Scale);
+            Rectangle screenrectangle = new Rectangle((Vector2)(screenposition), size * ObjectScreenSizeScalar);
 
             Raylib.DrawTexturePro(texture.GetTexture(), texturerectangle, screenrectangle, Vector2.Zero, 0, Color.White);
         }
 
         public static void DrawText(FontSlot font, string text, Vector2 position, float fontsize, Color colour)
         {
-            Raylib.DrawTextPro(font.GetFont(), text, position, Vector2.Zero, 0, fontsize, 0, colour);
+            Raylib.DrawTextPro(font.GetFont(), text, position * GUISizeScalar, Vector2.Zero, 0.0f, fontsize * GUISizeScalar, 1.0f * GUISizeScalar, colour);
         }
 
         public static void DrawRectangle(Rectangle rect, Color colour)
         {
-            Raylib.DrawRectanglePro(rect, Vector2.Zero, 0, colour);
+            Rectangle screenrectangle = new Rectangle(rect.Position * GUISizeScalar, rect.Size * GUISizeScalar);
+
+            Raylib.DrawRectanglePro(screenrectangle, Vector2.Zero, 0, colour);
         }
     }
 }

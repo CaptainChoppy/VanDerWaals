@@ -5,11 +5,14 @@ namespace VanDerWaals
 {
     internal static class Screen
     {
+        public const int ReferenceScreenWidth = 800;
+        public const int ReferenceScreenHeight = 600;
+
         public static uint Width
         { 
             get
             {
-                return (uint)(Raylib.GetScreenWidth());
+                return (uint)(ReferenceScreenWidth * Scale);
             }
         }
 
@@ -17,9 +20,20 @@ namespace VanDerWaals
         { 
             get
             {
-                return (uint)(Raylib.GetScreenHeight());
+                return (uint)(ReferenceScreenHeight * Scale);
             }
         }
+
+        public static float Scale
+        {
+            get;
+            set
+            {
+                Raylib.SetWindowSize((int)(ReferenceScreenWidth * value), (int)(ReferenceScreenHeight * value));
+
+                field = value;
+            }
+        } = 1.0f;
 
         public static Vector2 Dimentions
         {

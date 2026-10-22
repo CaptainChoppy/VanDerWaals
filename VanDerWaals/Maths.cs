@@ -21,5 +21,15 @@
         {
             return (int)(Ceiling(x));
         }
+
+        public static float Sine(float degrees)
+        {
+            return (float)(Math.Sin(degrees));
+        }
+
+        public static float Cosine(float degrees)
+        {
+            return (float)(Math.Cos(degrees));
+        }
     }
 }

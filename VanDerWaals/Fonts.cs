@@ -1,6 +1,4 @@
-﻿using Raylib_cs;
-
-namespace VanDerWaals
+﻿namespace VanDerWaals
 {
     internal static class Fonts
     {
