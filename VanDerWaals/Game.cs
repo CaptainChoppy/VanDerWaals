@@ -41,7 +41,7 @@ namespace VanDerWaals
                 $"Viewport Position : {Viewport.Position}\n" +
                 $"Viewport Scale : {Viewport.Scale}\n" +
                 $"Screen Scale : {Screen.Scale}\n" +
-                $"\n" +
+                $"Global Frame Time : {Time.GlobalFrameTime}\n" +
                 $"\n" +
                 $"\n" +
                 $"\n" +

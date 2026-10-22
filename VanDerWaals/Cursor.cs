@@ -5,11 +5,11 @@ namespace VanDerWaals
 {
     internal static class Cursor
     {
-        public static ScreenPosition TruePosition
+        public static Vector2 TruePosition
         {
             get
             {
-                return (ScreenPosition)(Raylib.GetMousePosition());
+                return Raylib.GetMousePosition();
             }
         }
 
