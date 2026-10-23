@@ -1,6 +1,4 @@
-﻿
-using System.Drawing;
-using System.Numerics;
+﻿using System.Numerics;
 
 namespace VanDerWaals
 {
@@ -8,7 +6,7 @@ namespace VanDerWaals
     {
         public static List<GUIElementTracker> GUIElements = new List<GUIElementTracker>();
 
-        public static GUIMouseEvent CurrentMouseEvents = new GUIMouseEvent();
+        public static GUIMouseEvent CurrentMouseEvents { get; private set; } = new GUIMouseEvent();
 
         public static void Update()
         {
@@ -27,22 +25,45 @@ namespace VanDerWaals
 
                 if(mouseinsiderect == false)
                 {
+                    element.Element.MouseOut();
                     continue;
+                }
+
+                switch (element.CursorState)
+                {
+                    case GUIElementCursorState.Enter:
+                        element.SetCursorState(GUIElementCursorState.Hover);
+                        element.Element.MouseEnter();
+                        break;
+                    case GUIElementCursorState.Hover:
+                        element.SetCursorState(GUIElementCursorState.Hover);
+                        element.Element.MouseHover();
+                        break;
+                    case GUIElementCursorState.Exit:
+                        element.SetCursorState(GUIElementCursorState.Enter);
+                        element.Element.MouseExit();
+                        break;
+                    case GUIElementCursorState.Out:
+                        element.SetCursorState(GUIElementCursorState.Enter);
+                        element.Element.MouseOut();
+                        break;
+                    default:
+                        break;
                 }
 
                 switch (CurrentMouseEvents.MouseButtonState)
                 {
                     case KeyState.Down:
-                        element.Element.MouseDown(CurrentMouseEvents);
+                        element.Element.MouseDown();
                         break;
                     case KeyState.Up:
-                        element.Element.MouseHover(CurrentMouseEvents);
+                        element.Element.MouseHover();
                         break;
                     case KeyState.Pressed:
-                        element.Element.MousePress(CurrentMouseEvents);
+                            element.Element.MousePress();
                         break;
                     case KeyState.Released:
-                        element.Element.MouseRelease(CurrentMouseEvents);
+                        element.Element.MouseRelease();
                         break;
                 }
             }
@@ -71,18 +92,24 @@ namespace VanDerWaals
     {
         public readonly GUIElement Element;
 
-        public GUIElementState State;
+        public GUIElementCursorState CursorState { get; private set; } = GUIElementCursorState.Out;
 
         public GUIElementTracker(GUIElement element)
         {
             Element = element;
         }
+
+        public void SetCursorState(GUIElementCursorState state)
+        {
+            CursorState = state;
+        }
     }
 
-    internal enum GUIElementState
+    internal enum GUIElementCursorState
     {
         Enter = 0,
         Hover,
-        Exit
+        Exit,
+        Out
     }
 }

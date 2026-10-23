@@ -96,7 +96,7 @@ namespace VanDerWaals
             }
         }
 
-        public static KeyState GetMouseState(MouseButtons button)
+        public static KeyState GetMouseButtonState(MouseButtons button)
         {
             if ((int)(button) > 6 || (int)(button) == 3)
             {

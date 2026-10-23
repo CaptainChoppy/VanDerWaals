@@ -12,9 +12,11 @@ namespace VanDerWaals
 
         private const string WindowTitle = "VanDerWaals";
 
+        private static readonly RenderTexture2D RenderTexture = new RenderTexture2D();
+
         public static void CreateWindow()
         {
-            Raylib.SetConfigFlags(ConfigFlags.AlwaysRunWindow | ConfigFlags.ResizableWindow);
+            Raylib.SetConfigFlags(ConfigFlags.AlwaysRunWindow);
             
             if(FrameRate != 0)
             {

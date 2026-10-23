@@ -29,6 +29,7 @@
         public static void RemoveObject(GameObject gameobject)
         {
             GameObjects.Remove(gameobject);
+            gameobject.OnDestroy();
         }
     }
 }

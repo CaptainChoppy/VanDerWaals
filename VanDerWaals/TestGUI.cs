@@ -1,41 +1,51 @@
 ﻿using Raylib_cs;
+using System.Diagnostics;
 
 namespace VanDerWaals
 {
     internal class TestGUI : GUIElement
     {
+        public static string DebugTextMouseState = "";
+        public static string DebugTextButtonState = "";
+
         public TestGUI(Rectangle rect, Color colour) : base(rect, colour)
         {
             ColourTint = colour;
         }
 
-        public override void MouseDown(GUIMouseEvent mouseevent)
+        public override void MouseDown()
         {
-            if(Time.GlobalFrameTime % 2 == 0)
-            {
-                ColourTint = new Color(0x00, 0x00, 0xFF);
-            }
-            else
-            {
-                ColourTint = new Color(0x00, 0xFF, 0xFF);
-            }
+            DebugTextButtonState = "Down";
         }
 
-        public override void MouseHover(GUIMouseEvent mouseevent)
+        public override void MouseRelease()
         {
-            ColourTint = new Color(0xFF, 0x00, 0xFF);
+            DebugTextButtonState = "Release";
         }
 
-        public override void MousePress(GUIMouseEvent mouseevent)
+        public override void MousePress()
         {
-            ColourTint = new Color(0x00, 0xFF, 0x00);
-            Debug.InfoLog("TEEHEE");
+            DebugTextButtonState = "Press";
         }
 
-        public override void MouseRelease(GUIMouseEvent mouseevent)
+        public override void MouseEnter()
         {
-            ColourTint = new Color(0xFF, 0x00, 0x00);
-            Debug.InfoLog("TEEHEE2");
+            DebugTextMouseState = "Enter";
+        }
+
+        public override void MouseHover()
+        {
+            DebugTextMouseState = "Hover";
+        }
+
+        public override void MouseExit()
+        {
+            DebugTextMouseState = "Exit";
+        }
+
+        public override void MouseOut()
+        {
+            DebugTextMouseState = "Out";
         }
     }
 }

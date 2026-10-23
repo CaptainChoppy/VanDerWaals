@@ -11,6 +11,24 @@ namespace VanDerWaals
 
         public static GUIText DebugText;
 
+        private static string CreateDebugText()
+        {
+            return
+                $"Cursor true position : {Cursor.TruePosition}\n" +
+                $"Cursor position : {Cursor.Position}\n" +
+                $"Cursor position percentage : {Cursor.PositionPercentage}\n" +
+                $"Viewport Position : {Viewport.Position}\n" +
+                $"Viewport Scale : {Viewport.Scale}\n" +
+                $"Screen Scale : {Screen.Scale}\n" +
+                $"Global Frame Time : {Time.GlobalFrameTime}\n" +
+                $"Test GUI Button : {TestGUI.DebugTextButtonState}\n" +
+                $"Test GUI Mouse  : {TestGUI.DebugTextMouseState}\n" +
+                $"\n" +
+                $"\n" +
+                $"\n" +
+                $"\n";
+        }
+
         static Game()
         {
             Raylib.SetTraceLogLevel(TraceLogLevel.Warning);
@@ -34,21 +52,7 @@ namespace VanDerWaals
 
         public static void Update()
         {
-            DebugText.Text =
-                $"Cursor true position : {Cursor.TruePosition}\n" +
-                $"Cursor position : {Cursor.Position}\n" +
-                $"Cursor position percentage : {Cursor.PositionPercentage}\n" +
-                $"Viewport Position : {Viewport.Position}\n" +
-                $"Viewport Scale : {Viewport.Scale}\n" +
-                $"Screen Scale : {Screen.Scale}\n" +
-                $"Global Frame Time : {Time.GlobalFrameTime}\n" +
-                $"\n" +
-                $"\n" +
-                $"\n" +
-                $"\n" +
-                $"\n" +
-                $"\n";
-
+            DebugText.Text = CreateDebugText();
 
             Inputs.Update();
             ObjectRegistry.Update();

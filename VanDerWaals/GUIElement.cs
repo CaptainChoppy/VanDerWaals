@@ -23,12 +23,13 @@ namespace VanDerWaals
 
         public virtual void Update() { }
 
-        public virtual void MouseDown(GUIMouseEvent mouseevent) { }
-        public virtual void MouseHover(GUIMouseEvent mouseevent) { }
-        public virtual void MouseEnter(GUIMouseEvent mouseevent) { }
-        public virtual void MouseExit(GUIMouseEvent mouseevent) { }
-        public virtual void MousePress(GUIMouseEvent mouseevent) { }
-        public virtual void MouseRelease(GUIMouseEvent mouseevent) { }
+        public virtual void MouseOut    () { }
+        public virtual void MouseEnter  () { }
+        public virtual void MouseHover  () { }
+        public virtual void MouseExit   () { }
+        public virtual void MousePress  () { }
+        public virtual void MouseDown   () { }
+        public virtual void MouseRelease() { }
     
         public void Destroy()
         {
